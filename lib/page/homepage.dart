@@ -1,32 +1,12 @@
 import 'package:finder/class/bachelor.dart';
 import 'package:finder/component/bachelorPreview.dart';
-import 'package:finder/page/likedpage.dart';
+import 'package:finder/provider/bacherlorProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:finder/service/generateBachelor.dart';
+import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  List<Bachelor> bachelors = [];
-
-  List<Bachelor> likedBachelors = [];
-
-  void addLikedBachelor(Bachelor bachelor) {
-    setState(() {
-      likedBachelors.add(bachelor);
-    });
-  }
-
-  @override
-  void initState() {
-    bachelors = BachelorService().getBachelors();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +16,19 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text("Finder"),
       ),
       body: Center(
-          child: ListView(
-        children: bachelors.map((Bachelor bachelor) {
-          return BachelorPreview(
-              bachelor: bachelor, addLikedBachelor: addLikedBachelor);
-        }).toList(),
-      )),
+        child: Consumer<BachelorProvider>(
+          builder: (context, bachelorProvider, _) {
+            return ListView(
+              children: bachelorProvider.bachelors.map((Bachelor bachelor) {
+                return BachelorPreview(bachelor: bachelor);
+              }).toList(),
+            );
+          },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LikedPage(likedBachelors: likedBachelors),
-            ),
-          );
+          context.go('/favorites');
         },
         backgroundColor: Colors.pinkAccent,
         child: const Icon(Icons.favorite, color: Colors.white),

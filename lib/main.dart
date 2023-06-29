@@ -1,16 +1,36 @@
 import 'package:finder/page/homepage.dart';
+import 'package:finder/page/likedpage.dart';
+import 'package:finder/provider/bacherlorProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => BachelorProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
-final _router = GoRouter(
-  routes: [
+final GoRouter router = GoRouter(
+  routes: <RouteBase>[
     GoRoute(
       path: '/',
-      builder: (context, state) => const MyHomePage(),
+      builder: (BuildContext context, GoRouterState state) {
+        return const MyHomePage();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'favorites',
+          builder: (BuildContext context, GoRouterState state) {
+            return const LikedPage();
+          },
+        ),
+      ],
     ),
   ],
 );
@@ -28,7 +48,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      routerConfig: _router,
+      routerConfig: router,
     );
   }
 }

@@ -1,11 +1,12 @@
 import 'package:finder/class/bachelor.dart';
 import 'package:finder/component/bachelorPreview.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/bacherlorProvider.dart';
 
 class LikedPage extends StatefulWidget {
-  const LikedPage({super.key, required this.likedBachelors});
-
-  final List<Bachelor> likedBachelors;
+  const LikedPage({super.key});
 
   @override
   State<LikedPage> createState() => _MyLikedPageState();
@@ -22,18 +23,16 @@ class _MyLikedPageState extends State<LikedPage> {
         title: const Text("Finder"),
       ),
       body: Center(
-          child: ListView(
-        children: widget.likedBachelors.map((Bachelor bachelor) {
-          return BachelorPreview(
-              bachelor: bachelor, addLikedBachelor: addLikedBachelor);
-        }).toList(),
-      )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Add your onPressed code here!
-        },
-        backgroundColor: Colors.pinkAccent,
-        child: const Icon(Icons.favorite, color: Colors.white),
+        child: Consumer<BachelorProvider>(
+          builder: (context, bachelorProvider, _) {
+            return ListView(
+              children:
+                  bachelorProvider.likedBachelors.map((Bachelor bachelor) {
+                return BachelorPreview(bachelor: bachelor);
+              }).toList(),
+            );
+          },
+        ),
       ),
     );
   }
