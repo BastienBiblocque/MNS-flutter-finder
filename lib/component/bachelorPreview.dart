@@ -33,15 +33,26 @@ class _BachelorPreviewState extends State<BachelorPreview> {
   Widget build(BuildContext context) {
     return Consumer<BachelorProvider>(
       builder: (context, bachelorProvider, _) {
-        return ListTile(
-          onTap: goToDetailPage,
-          title: bachelorProvider.likedBachelors.contains(widget.bachelor)
-              ? const Text('Favori')
-              : Text(widget.bachelor.firstName),
-          leading: Image.asset(widget.bachelor.avatar),
-          textColor: Colors.black,
-          tileColor: generateColor(),
-          contentPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+        return Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(7.5),
+              child: ListTile(
+                onTap: goToDetailPage,
+                title: Text(widget.bachelor.firstName),
+                leading: Image.asset(widget.bachelor.avatar),
+                trailing:
+                    bachelorProvider.likedBachelors.contains(widget.bachelor)
+                        ? const Icon(Icons.star, color: Colors.black)
+                        : null,
+                textColor: Colors.black,
+                tileColor: generateColor(),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                contentPadding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+              ),
+            ),
+          ],
         );
       },
     );
