@@ -10,15 +10,12 @@ class BachelorProvider extends ChangeNotifier {
   List<Bachelor> get likedBachelors => List.unmodifiable(_likedBachelors);
   List<Bachelor> get bachelors => List.unmodifiable(_bachelors);
 
-  // void addLikedBachelor(Bachelor bachelor) {
-  //   _likedBachelors.add(bachelor);
-  //   notifyListeners();
-  // }
-
-  // void removeLikedBachelor(Bachelor bachelor) {
-  //   _likedBachelors.remove(bachelor);
-  //   notifyListeners();
-  // }
+  void likeBachelor(Bachelor bachelor) {
+    if (!likedBachelors.contains(bachelor)) {
+      _likedBachelors.add(bachelor);
+    }
+    notifyListeners();
+  }
 
   void toggleLike(Bachelor bachelor) {
     if (likedBachelors.contains(bachelor)) {
@@ -26,14 +23,8 @@ class BachelorProvider extends ChangeNotifier {
     } else {
       _likedBachelors.add(bachelor);
     }
-
-    print(likedBachelors);
     notifyListeners();
   }
-
-  // List<Bachelor> getBachelors() {
-  //   return _likedBachelors;
-  // }
 
   bool isLiked(Bachelor bachelor) {
     print(likedBachelors);

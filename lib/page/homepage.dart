@@ -28,10 +28,10 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.go('/favorites');
+          context.go('/swipe');
         },
         backgroundColor: Colors.pinkAccent,
-        child: const Icon(Icons.favorite, color: Colors.white),
+        child: const Icon(Icons.swipe, color: Colors.white),
       ),
     );
   }

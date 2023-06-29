@@ -1,5 +1,6 @@
 import 'package:finder/page/homepage.dart';
 import 'package:finder/page/likedpage.dart';
+import 'package:finder/page/swipe.dart';
 import 'package:finder/provider/bacherlorProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +29,12 @@ final GoRouter router = GoRouter(
           path: 'favorites',
           builder: (BuildContext context, GoRouterState state) {
             return const LikedPage();
+          },
+        ),
+        GoRoute(
+          path: 'swipe',
+          builder: (BuildContext context, GoRouterState state) {
+            return SwipePage();
           },
         ),
       ],
