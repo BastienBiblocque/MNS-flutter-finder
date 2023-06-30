@@ -16,10 +16,17 @@ class _MyHomePageState extends State<MyHomePage> {
   void addLikedBachelor(Bachelor bachelor) {}
 
   Gender selectedGender = Gender.both;
+  String selectedName = '';
 
   void changeGender(Gender gender) {
     setState(() {
       selectedGender = gender;
+    });
+  }
+
+  void changeSelectedName(String name) {
+    setState(() {
+      selectedName = name;
     });
   }
 
@@ -28,7 +35,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Finder"),
+        title: TextField(
+          style: const TextStyle(color: Colors.white),
+          cursorColor: Colors.white,
+          decoration: const InputDecoration(
+            hintText: 'Search...',
+            hintStyle: TextStyle(color: Colors.white54),
+            border: InputBorder.none,
+          ),
+          onChanged: (value) {
+            changeSelectedName(value);
+          },
+        ),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -88,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context, bachelorProvider, _) {
             return ListView(
               children: bachelorProvider
-                  .getBachelorsFilterGender(selectedGender)
+                  .getBachelorsFilter(selectedGender, selectedName)
                   .map((Bachelor bachelor) {
                 return BachelorPreview(bachelor: bachelor);
               }).toList(),

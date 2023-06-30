@@ -32,14 +32,17 @@ class BachelorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Bachelor> getBachelorsFilterGender(Gender? gender) {
-    if (gender == Gender.both) {
-      return bachelors;
-    }
+  List<Bachelor> getBachelorsFilter(Gender? gender, String? name) {
     List<Bachelor> filterList = [];
     bachelors.forEach((element) {
-      if (element.gender == gender) {
-        filterList.add(element);
+      if (element.gender == gender || gender == Gender.both) {
+        if (name != null) {
+          if (element.firstName.toLowerCase().contains(name.toLowerCase())) {
+            filterList.add(element);
+          }
+        } else {
+          filterList.add(element);
+        }
       }
     });
     return filterList;
