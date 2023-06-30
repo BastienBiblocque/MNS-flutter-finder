@@ -28,7 +28,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/swipe',
       builder: (BuildContext context, GoRouterState state) {
-        return SwipePage();
+        return const SwipePage();
       },
     ),
     GoRoute(
