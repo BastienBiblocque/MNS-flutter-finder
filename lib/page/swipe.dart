@@ -95,20 +95,12 @@ class SwipePage extends StatelessWidget {
               backgroundColor: Colors.pinkAccent,
             ),
           ],
-          currentIndex: 1,
           selectedItemColor: Colors.white,
           onTap: (int index) {
             if (index == 0) {
               context.go('/');
             }
           },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            context.go('/favorites');
-          },
-          backgroundColor: Colors.pinkAccent,
-          child: const Icon(Icons.favorite, color: Colors.white),
         ),
       );
     });
