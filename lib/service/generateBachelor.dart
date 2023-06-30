@@ -58,13 +58,14 @@ class BachelorService {
     List<Bachelor> bachelors = [];
 
     bachelors = List.generate(
-        15,
-        (index) => Bachelor(
-            firstName: firstNameMan[rng.nextInt(firstNameMan.length)],
-            lastName: faker.person.lastName(),
-            gender: Gender.men,
-            description: faker.lorem.sentences(3).join(' '),
-            avatar: 'images/man-${index + 1}.png'));
+      15,
+      (index) => Bachelor(
+          firstName: firstNameMan[rng.nextInt(firstNameMan.length)],
+          lastName: faker.person.lastName(),
+          gender: Gender.men,
+          description: faker.lorem.sentences(3).join(' '),
+          avatar: 'images/man-${index + 1}.png'),
+    );
 
     for (int i = 0; i < 15; i++) {
       bachelors.add(Bachelor(

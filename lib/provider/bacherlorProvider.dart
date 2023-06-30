@@ -17,6 +17,12 @@ class BachelorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void dislikeBachelor(Bachelor bachelor) {
+    if (bachelors.contains(bachelor)) {
+      _bachelors.remove(bachelor);
+    }
+  }
+
   void toggleLike(Bachelor bachelor) {
     if (likedBachelors.contains(bachelor)) {
       _likedBachelors.remove(bachelor);
@@ -26,8 +32,20 @@ class BachelorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Bachelor> getBachelorsFilterGender(Gender? gender) {
+    if (gender == Gender.both) {
+      return bachelors;
+    }
+    List<Bachelor> filterList = [];
+    bachelors.forEach((element) {
+      if (element.gender == gender) {
+        filterList.add(element);
+      }
+    });
+    return filterList;
+  }
+
   bool isLiked(Bachelor bachelor) {
-    print(likedBachelors);
     return likedBachelors.contains(bachelor);
   }
 }

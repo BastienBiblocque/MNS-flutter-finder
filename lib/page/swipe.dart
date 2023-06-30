@@ -28,7 +28,11 @@ class SwipePage extends StatelessWidget {
                 onSwipe: (index, direction) => {
                   if (direction == AppinioSwiperDirection.right)
                     {
-                      bachelorsProvider.likeBachelor(bachelors[index]),
+                      bachelorsProvider.likeBachelor(bachelors[index - 1]),
+                    }
+                  else if (direction == AppinioSwiperDirection.left)
+                    {
+                      bachelorsProvider.dislikeBachelor(bachelors[index - 1]),
                     }
                 },
                 cardsBuilder: (BuildContext context, int index) {
@@ -44,7 +48,10 @@ class SwipePage extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image(image: AssetImage(bachelors[index].avatar)),
+                        Image(
+                            image: AssetImage(bachelors[index].avatar),
+                            height: 200,
+                            width: 200),
                         Text(
                           '${bachelors[index].firstName} ${bachelors[index].lastName}',
                           style: const TextStyle(
@@ -73,6 +80,28 @@ class SwipePage extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.pinkAccent,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+              backgroundColor: Colors.pinkAccent,
+            ),
+          ],
+          currentIndex: 1,
+          selectedItemColor: Colors.white,
+          onTap: (int index) {
+            if (index == 0) {
+              context.go('/');
+            }
+          },
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

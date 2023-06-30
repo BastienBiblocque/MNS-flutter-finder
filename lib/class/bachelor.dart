@@ -17,4 +17,4 @@ class Bachelor {
   final String? description;
 }
 
-enum Gender { men, women, other }
+enum Gender { men, women, both }

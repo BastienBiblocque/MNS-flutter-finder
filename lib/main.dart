@@ -24,20 +24,18 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return const MyHomePage();
       },
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'favorites',
-          builder: (BuildContext context, GoRouterState state) {
-            return const LikedPage();
-          },
-        ),
-        GoRoute(
-          path: 'swipe',
-          builder: (BuildContext context, GoRouterState state) {
-            return SwipePage();
-          },
-        ),
-      ],
+    ),
+    GoRoute(
+      path: '/swipe',
+      builder: (BuildContext context, GoRouterState state) {
+        return SwipePage();
+      },
+    ),
+    GoRoute(
+      path: '/favorites',
+      builder: (BuildContext context, GoRouterState state) {
+        return const LikedPage();
+      },
     ),
   ],
 );
